@@ -5,7 +5,7 @@ import threading
 import time
 
 ser = serial.Serial(
-    port='/dev/ttys015',
+    port='/dev/ttys019',
     baudrate=115200,
     parity=serial.PARITY_NONE,
     stopbits=serial.STOPBITS_ONE,
@@ -30,6 +30,8 @@ def pressHandler(event = None):
         roll_val.set(-10)
     elif event.char == 'd':
         roll_val.set(10)
+    elif event.char == 'f':
+        switchFlaps()
     else:
         try:
             acc_val.set(int(event.char))
@@ -54,7 +56,7 @@ def startFlying():
     global roll_val
     global pitch_val
     global acc_val
-    ser.write(b"\x01\x00\x00\x00")
+    ser.write(b"\x01\x00\x00\x00\x00")
     time.sleep(0.01)
     start_button.config(text="Waiting for taxiing", state=tk.DISABLED)
     ReceivedData = b""
@@ -67,6 +69,12 @@ def startFlying():
     pitch_slider.config(state=tk.ACTIVE)
     acc_slider.config(state=tk.ACTIVE)
     sendData()
+
+def switchFlaps():
+    global flap_val
+    global flap_button
+    flap_val.set(True if not flap_val.get() else False) 
+    flap_button.config(text=("Close Flaps(f)" if flap_val.get() else "Open Flaps(f)"))
 
 def sendData():
     global roll_val
@@ -89,9 +97,12 @@ def sendData():
             bPitch = b"\x01"
         else:
             bPitch = b"\x02"
-        data += bAcc + bRoll + bPitch
+        
+        bFlap = b"\x01" if flap_val.get() else b"\x00"
+
+        data += bAcc + bRoll + bPitch + bFlap
         ser.write(data)
-        time.sleep(1/60)
+        time.sleep(1/5)
 
 def startFlyThread():
     flythread = threading.Thread(target=startFlying, daemon=True)
@@ -99,7 +110,7 @@ def startFlyThread():
     
 
 start_button = tk.Button(gui,text="Start the Plane", command=startFlyThread)
-start_button.grid(row=0, columnspan=3, pady=10)
+start_button.grid(row=0, columnspan=2, pady=10)
 
 roll_label = tk.Label(gui,text='Roll')
 roll_label.grid(row=2,column=0)
@@ -121,6 +132,10 @@ acc_label.grid(row=2, column=2)
 acc_val = tk.IntVar(gui,value=0)
 acc_slider = tk.Scale(gui, from_=9, to=0, orient='vertical', variable=acc_val, state=tk.DISABLED)
 acc_slider.grid(row=1, column=2, padx=50)
+
+flap_val = tk.BooleanVar(gui, value=False)
+flap_button = tk.Button(gui, text="Open Flaps(f)", command=switchFlaps)
+flap_button.grid(row=0, column=2, pady=10)
 
 
 gui.bind('<KeyPress>', pressHandler)

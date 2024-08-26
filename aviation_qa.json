@@ -1,0 +1,52 @@
+{
+    "data": [
+      {
+        "title": "Aviation",
+        "paragraphs": [
+          {
+            "context": "Aviation is the activities surrounding mechanical flight and the aircraft industry. Aircraft includes fixed-wing and rotary-wing types, morphable wings, wing-less lifting bodies, and lighter-than-air craft such as balloons and airships.",
+            "qas": [
+              {
+                "question": "What does aviation include?",
+                "id": "1",
+                "answers": [
+                  {
+                    "answer_start": 75,
+                    "answer_end": 208,
+                    "text": "fixed-wing and rotary-wing types, morphable wings, wing-less lifting bodies, and lighter-than-air craft such as balloons and airships."
+                  }
+                ]
+              },
+              {
+                "question": "What is the definition of aviation?",
+                "id": "2",
+                "answers": [
+                  {
+                    "answer_start": 0,
+                    "answer_end": 82,
+                    "text": "Aviation is the activities surrounding mechanical flight and the aircraft industry."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "context":"Airfoils and engines share one characteristic in that their performance hinges on the density of the air. When the air expands because of the heat, the molecules are driven apart, and there is a lower weight of air per cubic foot than there is when the air is cool. As a result, the wing can't extract as much energy from the same airflow and requires higher speeds to get the same effects. The engine, which essentially is an air compressor, can't find enough air to gulp down, so the fuel/air ratio is too rich for efficient combustion and you have to lean it out. The result is that the engine is turning out less horsepower - and it is trying to put that energy into the slipstream through a propeller whose efficiency also is compromised by the higher temperatures. These further compound the degraded performance potential of the wings.",
+            "qas": [
+                {
+                    "question": "Why do higher temperatures decrease performance?",
+                    "id" : "1",
+                    "answers": [
+                        {
+                            "answer_start": 0,
+                            "answer_end": 841,
+                            "text": "Airfoils and engines share one characteristic in that their performance hinges on the density of the air. When the air expands because of the heat, the molecules are driven apart, and there is a lower weight of air per cubic foot than there is when the air is cool. As a result, the wing can't extract as much energy from the same airflow and requires higher speeds to get the same effects. The engine, which essentially is an air compressor, can't find enough air to gulp down, so the fuel/air ratio is too rich for efficient combustion and you have to lean it out. The result is that the engine is turning out less horsepower - and it is trying to put that energy into the slipstream through a propeller whose efficiency also is compromised by the higher temperatures. These further compound the degraded performance potential of the wings. "
+                        }
+                    ]
+                }
+            ]
+          }
+        ]
+      }
+    ]
+  }
